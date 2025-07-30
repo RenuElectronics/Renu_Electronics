@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Renu Electronics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Logo -->
+        <div class="logo">
+            <img src="{{ url_for('static', filename='lg.png') }}" alt="Renu Electronics Logo">
+        </div>
+
+        <!-- Title -->
+         
+        <h2>RENU ELECTRONICS</h2>
+        <h3>Search Details by Engineer Name or RNP Number</h3>
+
+        <!-- Search Form -->
+        <form method="post">
+            <input type="text" name="engineer" placeholder="Engineer Name">
+            <input type="text" name="rnp" placeholder="RNP Number">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Result Table -->
+        {% if results %}
+        <h3>Results:</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        {% for key in results[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        {% for val in row.values() %}
+                        <td>{{ val }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
